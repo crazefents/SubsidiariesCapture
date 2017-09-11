@@ -1,0 +1,111 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Subsidiaries</title>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="Bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" />
+
+    <style>
+        body {
+            background-image: url("paper.gif");
+            background-color: #cccccc;
+        }
+    </style>
+
+    <style type="text/css">
+        .table-hover tbody tr:hover td {
+            background-color: white;
+            color: black;
+        }
+
+        body {
+            margin: 50px;
+        }
+    </style>
+
+    <script type="text/javascript">
+        $("[data-toggle=popover]").popover({
+            html: true,
+            content: function () {
+                return $('#popover-content').html();
+            }
+        });
+    </script>
+</head>
+<body>
+   
+
+    <div class="jumbotron  jumbotron-fluid ">
+       
+            
+    </div>
+
+    <div class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">
+                    <img src="~/Content/images/tree.png" class="img-rounded" width="100" height="80" alt="">
+                </a>
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+
+                </button>
+
+                @Html.ActionLink("Subsidiaries Capture", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                <ul class="nav navbar-nav">
+                    <li><a class="active" data-toggle="tab" onclick="@("window.location.href='" + Url.Action("Index", "CompanyNames1") + "'")">Home</></a></li>
+                    <li><a data-toggle="tab" onclick="@("window.location.href='" + Url.Action("Index2","CompanyNames" )+"'")">Other Search</></a></li>
+                    <li><a data-toggle="tab" href="3">Reports</a></li>
+                    <li><a data-toggle="tab" href="#">About</a></li>
+
+                </ul>
+
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav"></ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        
+        @RenderBody()
+       
+        <p class="col-sm-0 col-sm-offset-11" >
+       
+            <input type="button" value="Print" onclick="window.print()">
+                
+        </p>
+
+    </div>
+    <hr />
+    <footer>
+        <div class="panel panel-primary">
+            <p>&copy; @DateTime.Now.Year - Subsidiaries</p>
+        </div>
+    </footer>
+
+
+    <script src="~/Scripts/confirm.js"></script>
+    <script src="~/Scripts/jquery.validate-vsdoc.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script>
+        $("[data-toggle=popover]").popover({
+            html: true,
+            content: function () {
+                return $('#popover-content').html();
+            }
+        });
+    </script>
+   
+</body>
+</html>

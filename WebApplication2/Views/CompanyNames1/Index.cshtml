@@ -1,0 +1,97 @@
+﻿@model IEnumerable<WebApplication2.Models.CompanyName>
+
+@{
+    ViewBag.Title = "Index";
+
+
+}
+
+<h2>Company Name Search</h2>
+
+<div type="button" class="btn btn-default btn-md">
+    <p>
+
+       <pre style="color:ButtonHighlight" >@Html.ActionLink("Create New", "Create")</pre>
+        
+</div>
+
+    @using (Html.BeginForm())
+    {
+        <div class="container-fluid">
+                <label class="label-info " title="Exchange"></label>
+
+
+            
+                <div class="dropdown container-fluid" >
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <p>
+                          Exchange @Html.DropDownList("ExchangeCode", "All")
+
+                        </p>
+                    </button>
+                </div>
+
+                <div class="dropdown container-fluid">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <p>
+                            Type of Company: @Html.DropDownList("CompanyTypeID", "All")
+
+                        </p>
+                    </button>
+                </div>
+                <div class="dropdown container-fluid">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <p>
+                            Search by :@Html.DropDownList("fields")
+                        <p>
+                    </button>
+                </div>
+                <p>
+                    Enter Search: @Html.TextBox("SearchString") <br />
+                    <input class="btn btn-info" type="submit" value="Search" />
+                    
+                </p>
+            </div>
+      
+    }
+                
+
+            <div id="popover-content" style="display:none;">
+                <ul>
+                    <li><a class="active" data-toggle="tab" onclick="@("window.location.href='" + Url.Action("Index", "Associations") + "'")">Associations</></a></li>
+                    <li><a class="active" data-toggle="tab" onclick="@("window.location.href='" + Url.Action("Index2", "Associations") + "'")">Subsidiaries</></a></li>
+                    <li><a class="active" data-toggle="tab" onclick="@("window.location.href='" + Url.Action("Index3", "Associations") + "'")">Investments</></a></li>
+                </ul>
+            </div>
+
+            <table class="table able-inverse table-hover">
+                <tr>
+
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.CompanyName1)
+                    </th>
+                    <th></th>
+                </tr>
+
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CompanyName1)
+                        </td>
+                        <td>
+                            <a data-toggle="popover" title="Group Holdings" data-placement="bottom">Group Holdings</a> |
+
+                            @Html.ActionLink("Details", "Details", new { id = item.CompanyID }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.CompanyID })
+                          
+                           
+                           
+
+                        </td>
+                    </tr>
+                }
+            </table>
+
