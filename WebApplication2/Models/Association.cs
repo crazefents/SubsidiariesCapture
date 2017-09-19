@@ -25,5 +25,7 @@ namespace WebApplication2.Models
     
         public virtual AssociationType AssociationType { get; set; }
         public virtual CompanyName CompanyName { get; set; }
+        public object Exchange { get; internal set; }
+        public object CompanyType { get; internal set; }
     }
 }

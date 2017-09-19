@@ -9,6 +9,11 @@
     <script src="~/Scripts/modernizr-2.6.2.js"></script>
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
     <link href="Bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/confirm.js"></script>
+    <script src="~/Scripts/jquery.validate-vsdoc.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
 
     <style>
         body {
@@ -32,7 +37,9 @@
         $("[data-toggle=popover]").popover({
             html: true,
             content: function () {
-                return $('#popover-content').html();
+                var targetId = $(this).attr('data-target');
+        //        alert(targetId);
+                return $(targetId).html();
             }
         });
     </script>
@@ -40,12 +47,12 @@
 <body>
    
 
-    <div class="jumbotron  jumbotron-fluid ">
+    <div class="jumbotron  jumbotron-fluid" style="border:1px solid #000000;">
        
             
     </div>
 
-    <div class="navbar navbar-default navbar-fixed-top">
+    <div class="navbar navbar-default navbar-fixed-top" style="border:1px solid #000000;">
         <div class="container-fluid">
             <div class="navbar-header">
                 <a class="navbar-brand" href="#">
@@ -93,16 +100,21 @@
     </footer>
 
 
-    <script src="~/Scripts/confirm.js"></script>
-    <script src="~/Scripts/jquery.validate-vsdoc.js"></script>
-    <script src="~/Scripts/bootstrap.js"></script>
-    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
-    <script src="~/Scripts/bootstrap.min.js"></script>
+   
     <script>
+        //$("[data-toggle=popover]").popover({
+        //    html: true,
+        //    content: function () {
+        //        return $('#popover-content').html();
+        //    }
+        //});
+
         $("[data-toggle=popover]").popover({
             html: true,
             content: function () {
-                return $('#popover-content').html();
+                var targetId = $(this).attr('data-target');
+               // alert(targetId);
+                return $(targetId).html();
             }
         });
     </script>

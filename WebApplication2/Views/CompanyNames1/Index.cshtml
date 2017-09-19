@@ -6,55 +6,98 @@
 
 }
 
-<h2>Company Name Search</h2>
+<div> 
 
-<div type="button" class="btn btn-default btn-md">
-    <p>
+    <header class="label label-default" ><span>Company Name Search</span></header> 
+    
+    
+</div>
+<span type="buttonlink" class="btn btn-default">
+    
 
        <pre style="color:ButtonHighlight" >@Html.ActionLink("Create New", "Create")</pre>
         
-</div>
+        
+</span>
 
     @using (Html.BeginForm())
     {
-        <div class="container-fluid">
-                <label class="label-info " title="Exchange"></label>
+        <style type="text/css">
+            input[type="text"] {
+                width: 50px;
+             
+            }
+              </style>
+            <style>  div{}  .success { background-color: ButtonHighlight; overflow:initial;}
+            </style>
+
+            <div class="success  ">
+                <div class="success">
 
 
-            
-                <div class="dropdown container-fluid" >
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <p>
-                          Exchange @Html.DropDownList("ExchangeCode", "All")
 
-                        </p>
-                    </button>
+                    <div class="row">
+                        <h5 for="Exchange" class="col-sm-2 control-label">Exchange</h5>
+
+                        <div class="col-sm-10">
+
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+
+                                @Html.DropDownList("ExchangeCode", "ALL")
+
+
+
+                            </button>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <h5 for="Type of Company:" class="col-sm-2 control-label">Type of Company:</h5>
+
+                        <div class="col-sm-10">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                                @Html.DropDownList("CompanyTypeID","ALL")
+
+
+                            </button>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <h5 for="Search by :" class="col-sm-2 control-label">Search by :</h5>
+
+                        <div class="col-sm-10">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                                @Html.DropDownList("fields", null, new { style = "width:250px" })
+
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <h5 for="Enter Search:" class="col-sm-2 control-label">Enter Search:</h5>
+
+                        <div class="col-sm-10  ">
+                            <p class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                @Html.TextBox("SearchString", null, new { style = "width:250px" }) 
+
+                              
+                            </p>
+                           
+                       </div>
+                        <div class="col-sm-2 col-sm-10">
+                            <input class="btn btn-info" type="submit" value="Search" />
+                        </div>
                 </div>
-
-                <div class="dropdown container-fluid">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <p>
-                            Type of Company: @Html.DropDownList("CompanyTypeID", "All")
-
-                        </p>
-                    </button>
-                </div>
-                <div class="dropdown container-fluid">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <p>
-                            Search by :@Html.DropDownList("fields")
-                        <p>
-                    </button>
-                </div>
-                <p>
-                    Enter Search: @Html.TextBox("SearchString") <br />
-                    <input class="btn btn-info" type="submit" value="Search" />
-                    
-                </p>
+                    </div>
             </div>
-      
     }
-                
+
 
             <div id="popover-content" style="display:none;">
                 <ul>
@@ -64,34 +107,48 @@
                 </ul>
             </div>
 
-            <table class="table able-inverse table-hover">
-                <tr>
 
-
-                    <th>
-                        @Html.DisplayNameFor(model => model.CompanyName1)
-                    </th>
-                    <th></th>
-                </tr>
-
-
-                @foreach (var item in Model)
-                {
+            <div class="container-fluid" style="border:1px solid #000000;">
+                <table class="table table-striped table-hover">
                     <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.CompanyName1)
-                        </td>
-                        <td>
-                            <a data-toggle="popover" title="Group Holdings" data-placement="bottom">Group Holdings</a> |
 
-                            @Html.ActionLink("Details", "Details", new { id = item.CompanyID }) |
-                            @Html.ActionLink("Delete", "Delete", new { id = item.CompanyID })
-                          
-                           
-                           
 
-                        </td>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CompanyName1)
+                        </th>
+                        <th></th>
                     </tr>
-                }
-            </table>
+
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CompanyName1)
+                            </td>
+                            <td>
+                                <a data-toggle="popover" data-target="#popover-content_@item.CompanyID"  title="Group Holdings" data-placement="bottom">Group Holdings</a> |
+                                 <div id="popover-content_@item.CompanyID" style="display:none;">
+                                     <ul>
+                                         <li><a href="/Associations/index?id=@item.CompanyID">Associations</a></li>
+                                         <li><a href="/Associations/Index2?id=@item.CompanyID">Subsidiaries</a></li>
+                                         <li><a href="/Associations/index3?id=@item.CompanyID">Investments</a></li>
+                                     </ul>
+                                    </div>
+
+                                @Html.ActionLink("Details", "Details", new { id = item.CompanyID }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.CompanyID })
+
+
+
+
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+            </div>
+           
+           
+
 

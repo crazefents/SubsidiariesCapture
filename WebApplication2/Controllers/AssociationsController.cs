@@ -17,39 +17,40 @@ namespace WebApplication2.Controllers
         // GET: Associations
         public ActionResult Index(int? id)
         {
-           
 
-            var associations = from m in db.Associations
-                               select m;
-            var ex1 = from m in db.Exchanges select m;
+            int companyId = id ?? 0;
+            var associations = db.Associations.Where(x => x.CompanyID.Equals(companyId)).ToList();
+                              
+
+            associations = associations.Where(s => s.AssocType == 3).ToList();
             
-                associations = associations.Where(s => s.AssocType == 3);
-            
+
+            return View(associations.ToList());
+        }
+        
+
+        // GET: Associations
+        public ActionResult Index2(int? id)
+        {
+
+            int companyId = id ?? 0;
+            var associations = db.Associations.Where(x => x.CompanyID.Equals(companyId)).ToList();
+
+
+
+            associations = associations.Where(m => m.AssocType == 1).ToList();
+
             return View(associations.ToList());
         }
 
         // GET: Associations
-        public ActionResult Index2()
+        public ActionResult Index3(int? id)
         {
 
-            var associations = from m in db.Associations
-                               select m;
+            int companyId = id ?? 0;
+            var associations = db.Associations.Where(x => x.CompanyID.Equals(companyId)).ToList();
 
-
-            associations = associations.Where(s => s.AssocType == 1);
-
-            return View(associations.ToList());
-        }
-
-        // GET: Associations
-        public ActionResult Index3()
-        {
-
-            var associations = from m in db.Associations
-                               select m;
-
-
-            associations = associations.Where(s => s.AssocType == 2);
+            associations = associations.Where(s => s.AssocType == 2).ToList();
 
             return View(associations.ToList());
         }
