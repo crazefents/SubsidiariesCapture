@@ -17,7 +17,8 @@ namespace WebApplication2.Controllers
         // GET: CompanyNames
         public ActionResult Index2()
         {
-            var companyNames = db.CompanyNames.Include(c => c.CompanyType).Include(c => c.Exchange);
+            var companyNames = from m in db.CompanyNames
+                               select m;
             return View(companyNames.ToList());
         }
 
@@ -101,11 +102,13 @@ namespace WebApplication2.Controllers
         // GET: CompanyNames/Delete/5
         public ActionResult Delete(int? id)
         {
+            int AssocID = id ?? 0;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             CompanyName companyName = db.CompanyNames.Find(id);
+            Association assosiation = db.Associations.Find(id);
             if (companyName == null)
             {
                 return HttpNotFound();
@@ -119,6 +122,7 @@ namespace WebApplication2.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             CompanyName companyName = db.CompanyNames.Find(id);
+            Association assosiation = db.Associations.Find(id);
             db.CompanyNames.Remove(companyName);
             db.SaveChanges();
             return RedirectToAction("Index2");

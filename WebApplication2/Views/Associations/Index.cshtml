@@ -4,15 +4,15 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Associates</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "Create22")
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.CompanyName.CompanyName1)
+            @Html.DisplayNameFor(model => model.AssocName)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.AssPercent)
@@ -41,7 +41,7 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.CompanyName.CompanyName1)
+            @Html.DisplayFor(modelItem => item.AssocName)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.AssPercent)
@@ -65,9 +65,9 @@
             @Html.DisplayFor(modelItem => item.CompanyName.ExchangeCode)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.AssocID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.AssocID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.AssocID })
+            @Html.ActionLink("Edit", "Edit", new { id = item.AssocID }) |
+            @Html.ActionLink("Details", "Details", new { id = item.AssocID }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.AssocID })
         </td>
     </tr>
 }

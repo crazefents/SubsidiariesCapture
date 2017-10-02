@@ -28,11 +28,9 @@ namespace WebApplication2.Models
         public string CountryID { get; set; }
         public string BusinessSectorID { get; set; }
         public int CompanyTypeID { get; set; }
-        public System.DateTime UpdateDate { get; set; }
+        public Nullable<System.DateTime> UpdateDate { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Association> Associations { get; set; }
-        public virtual CompanyType CompanyType { get; set; }
-        public virtual Exchange Exchange { get; set; }
     }
 }

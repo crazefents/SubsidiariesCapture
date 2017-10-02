@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using WebApplication2.Models;
 
@@ -15,6 +12,20 @@ namespace WebApplication2.Controllers
         private SubsidiariesEntities1 db = new SubsidiariesEntities1();
 
         // GET: Associations
+        public ActionResult ass(int? id ,string EditMode)
+        {
+
+            var associations = from m in db.Associations
+                               select m;
+
+          //  EditMode = "Edit";
+
+            return View(associations.ToList());
+        }
+
+
+        // GET: Associations
+  
         public ActionResult Index(int? id)
         {
 
@@ -73,7 +84,7 @@ namespace WebApplication2.Controllers
         }
 
         // GET: Associations/Create
-        public ActionResult Create()
+        public ActionResult Create22()
         {
             ViewBag.AssocType = new SelectList(db.AssociationTypes, "AssocType", "Description");
              ViewBag.CompanyID = new SelectList(db.CompanyNames, "CompanyID", "CompanyName1");
@@ -85,32 +96,39 @@ namespace WebApplication2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "AssocID,CompanyID,AssocType,AssPercent,DirectRel,UpdateDate,ChangeDate,NoShares_YN")] Association association)
+        public ActionResult Create22([Bind(Include = "AssocID,AssocName,CompanyID,CompanyName1,AssocType,AssPercent,DirectRel,UpdateDate,ChangeDate,ExchangeCode,NoShares_YN")] Association association)
         {
             if (ModelState.IsValid)
             {
                 db.Associations.Add(association);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("ass");
             }
 
             ViewBag.AssocType = new SelectList(db.AssociationTypes, "AssocType", "Description", association.AssocType);
             ViewBag.CompanyID = new SelectList(db.CompanyNames, "CompanyID", "CompanyName1", association.CompanyID);
+          //  ViewBag.ExchangeCode = new SelectList(db.CompanyNames, "ExchangeCode", "ExchangeName", association.ExchangeCode);
             return View(association);
         }
 
         // GET: Associations/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int? id, string EditMode)
         {
+            int companyId = id ?? 0;
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            
+          
             Association association = db.Associations.Find(id);
             if (association == null)
             {
                 return HttpNotFound();
             }
+
+            
             ViewBag.AssocType = new SelectList(db.AssociationTypes, "AssocType", "Description", association.AssocType);
             ViewBag.CompanyID = new SelectList(db.CompanyNames, "CompanyID", "CompanyName1", association.CompanyID);
             return View(association);
@@ -121,13 +139,14 @@ namespace WebApplication2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "AssocID,CompanyID,AssocType,AssPercent,DirectRel,UpdateDate,ChangeDate,NoShares_YN")] Association association)
+        public ActionResult Edit([Bind(Include = "AssocID,AssocName,CompanyID,CompanyName1,AssocType,AssPercent,DirectRel,UpdateDate,ChangeDate,ExchangeCode,NoShares_YN")] Association association)
         {
+            
             if (ModelState.IsValid)
             {
                 db.Entry(association).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("ass");
             }
             ViewBag.AssocType = new SelectList(db.AssociationTypes, "AssocType", "Description", association.AssocType);
             ViewBag.CompanyID = new SelectList(db.CompanyNames, "CompanyID", "CompanyName1", association.CompanyID);
@@ -137,6 +156,7 @@ namespace WebApplication2.Controllers
         // GET: Associations/Delete/5
         public ActionResult Delete(int? id)
         {
+            int companyId = id ?? 0;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -152,12 +172,14 @@ namespace WebApplication2.Controllers
         // POST: Associations/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int? id)
         {
+            int companyId = id ?? 0;
+           // int AssocID = id ?? 0;
             Association association = db.Associations.Find(id);
             db.Associations.Remove(association);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("ass");
         }
 
         protected override void Dispose(bool disposing)

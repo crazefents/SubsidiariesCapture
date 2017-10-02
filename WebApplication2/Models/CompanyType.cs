@@ -14,17 +14,8 @@ namespace WebApplication2.Models
     
     public partial class CompanyType
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public CompanyType()
-        {
-            this.CompanyNames = new HashSet<CompanyName>();
-        }
-    
         public int CompanyTypeID { get; set; }
         public string CompanyTypeDesc { get; set; }
         public Nullable<System.DateTime> UpdateDate { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CompanyName> CompanyNames { get; set; }
     }
 }

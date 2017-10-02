@@ -161,6 +161,7 @@ namespace WebApplication2.Controllers
         // GET: CompanyNames1/Delete/5
         public ActionResult Delete(int? id)
         {
+            int AssocID = id ?? 0;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);

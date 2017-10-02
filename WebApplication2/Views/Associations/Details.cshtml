@@ -11,6 +11,20 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
+            @Html.DisplayNameFor(model => model.CompanyName.CompanyName1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CompanyName.CompanyName1)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.AssocName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AssocName)
+        </dd>
+        <dt>
             @Html.DisplayNameFor(model => model.AssPercent)
         </dt>
 
@@ -70,5 +84,5 @@
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.AssocID }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "ass", new { id = Model.CompanyID })
 </p>

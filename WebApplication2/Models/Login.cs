@@ -10,10 +10,13 @@
 namespace WebApplication2.Models
 {
     using System;
+    using System.Collections.Generic;
     
-    public partial class sp_helpdiagramdefinition_Result
+    public partial class Login
     {
-        public Nullable<int> version { get; set; }
-        public byte[] definition { get; set; }
+        public int UserID { get; set; }
+        public string Password { get; set; }
+    
+        public virtual Registration_dbo Registration_dbo { get; set; }
     }
 }

@@ -44,7 +44,7 @@
         });
     </script>
 </head>
-<body>
+<body style="font-family:courier;">
    
 
     <div class="jumbotron  jumbotron-fluid" style="border:1px solid #000000;">
@@ -65,11 +65,11 @@
 
                 </button>
 
-                @Html.ActionLink("Subsidiaries Capture", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Subsidiaries Capture", "Index", "CompanyNames1", new { area = "" }, new { @class = "navbar-brand" })
                 <ul class="nav navbar-nav">
                     <li><a class="active" data-toggle="tab" onclick="@("window.location.href='" + Url.Action("Index", "CompanyNames1") + "'")">Home</></a></li>
                     <li><a data-toggle="tab" onclick="@("window.location.href='" + Url.Action("Index2","CompanyNames" )+"'")">Other Search</></a></li>
-                    <li><a data-toggle="tab" href="3">Reports</a></li>
+                    <li><a data-toggle="tab" onclick="@("window.location.href='" + Url.Action("ass","Associations" )+"'")">Reports</a></li>
                     <li><a data-toggle="tab" href="#">About</a></li>
 
                 </ul>

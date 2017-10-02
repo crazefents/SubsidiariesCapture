@@ -11,9 +11,12 @@ namespace WebApplication2.Models
 {
     using System;
     using System.Collections.Generic;
-    
+
+   
+
     public partial class Association
     {
+
         public int AssocID { get; set; }
         public int CompanyID { get; set; }
         public int AssocType { get; set; }
@@ -22,10 +25,19 @@ namespace WebApplication2.Models
         public System.DateTime UpdateDate { get; set; }
         public System.DateTime ChangeDate { get; set; }
         public int NoShares_YN { get; set; }
-    
+        public string AssocName { get; set; }
+
+        public string EditMode { get; set; } 
+
+        
+       
+
+
         public virtual AssociationType AssociationType { get; set; }
         public virtual CompanyName CompanyName { get; set; }
-        public object Exchange { get; internal set; }
-        public object CompanyType { get; internal set; }
     }
+
+
+
+
 }

@@ -4,25 +4,37 @@
     ViewBag.Title = "ass";
 }
 
-<h2>ass</h2>
+<h2>Group Holdings</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "Create22")
+</p>
+
+<p>
+    @Html.ActionLink("Ok", "")
 </p>
 <table class="table">
     <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.AssocName)
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.AssPercent)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.DirectRel)
         </th>
+       
         <th>
             @Html.DisplayNameFor(model => model.UpdateDate)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.ChangeDate)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EditMode)
+        </th>
+           
         <th>
             @Html.DisplayNameFor(model => model.NoShares_YN)
         </th>
@@ -38,6 +50,9 @@
 @foreach (var item in Model) {
     <tr>
         <td>
+            @Html.DisplayFor(modelItem => item.AssocName)
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.AssPercent)
         </td>
         <td>
@@ -49,6 +64,10 @@
         <td>
             @Html.DisplayFor(modelItem => item.ChangeDate)
         </td>
+        <th>
+            @Html.DisplayFor(modelItem => item.EditMode)
+        </th>
+       
         <td>
             @Html.DisplayFor(modelItem => item.NoShares_YN)
         </td>
@@ -59,6 +78,7 @@
             @Html.DisplayFor(modelItem => item.CompanyName.ExchangeCode)
         </td>
         <td>
+            
             @Html.ActionLink("Edit", "Edit", new { id=item.AssocID }) |
             @Html.ActionLink("Details", "Details", new { id=item.AssocID }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.AssocID })

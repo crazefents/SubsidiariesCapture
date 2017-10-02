@@ -4,11 +4,15 @@
     ViewBag.Title = "Index";
 
 
-}
+} 
+
+@using (Html.BeginForm())
+{
 
 <div> 
 
-    <header class="label label-default" ><span>Company Name Search</span></header> 
+    
+    <h2 style="text-align:center;font-family:courier;">Company Name Search</h2>
     
     
 </div>
@@ -20,8 +24,6 @@
         
 </span>
 
-    @using (Html.BeginForm())
-    {
         <style type="text/css">
             input[type="text"] {
                 width: 50px;
@@ -86,7 +88,7 @@
                             <p class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 @Html.TextBox("SearchString", null, new { style = "width:250px" }) 
 
-                              
+                    
                             </p>
                            
                        </div>
