@@ -149,6 +149,7 @@ namespace WebApplication2.Controllers
         {
             if (ModelState.IsValid)
             {
+                companyName.UpdateDate = DateTime.Now;
                 db.Entry(companyName).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

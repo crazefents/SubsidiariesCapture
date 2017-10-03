@@ -126,7 +126,7 @@
                     {
                         <tr>
                             <td>
-                                @Html.DisplayFor(modelItem => item.CompanyName1)
+                                @Html.DisplayFor(modelItem => item.CompanyName1)-@Html.DisplayFor(modelItem => item.ExchangeCode)                                
                             </td>
                             <td>
                                 <a data-toggle="popover" data-target="#popover-content_@item.CompanyID"  title="Group Holdings" data-placement="bottom">Group Holdings</a> |
@@ -135,6 +135,7 @@
                                          <li><a href="/Associations/index?id=@item.CompanyID">Associations</a></li>
                                          <li><a href="/Associations/Index2?id=@item.CompanyID">Subsidiaries</a></li>
                                          <li><a href="/Associations/index3?id=@item.CompanyID">Investments</a></li>
+                                         
                                      </ul>
                                     </div>
 

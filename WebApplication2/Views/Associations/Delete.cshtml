@@ -73,7 +73,7 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
+            <input type="submit" value="Delete" class="btn btn-default" onclick = "return confirm('Are you sure you wish to delete this Compamy?');" /> |
             @Html.ActionLink("Back to List", "ass", new { id = Model.CompanyID })
         </div>
     }

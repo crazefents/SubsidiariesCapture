@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
@@ -139,11 +140,12 @@ namespace WebApplication2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "AssocID,AssocName,CompanyID,CompanyName1,AssocType,AssPercent,DirectRel,UpdateDate,ChangeDate,ExchangeCode,NoShares_YN")] Association association)
+        public ActionResult Edit([Bind(Include = "AssocID,AssocName,CompanyID,CompanyName1,AssocType,AssPercent,DirectRel,UpdateDate,DateTime.Now,ExchangeCode,NoShares_YN")] Association association)
         {
             
             if (ModelState.IsValid)
             {
+                association.ChangeDate = DateTime.Now;
                 db.Entry(association).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("ass");

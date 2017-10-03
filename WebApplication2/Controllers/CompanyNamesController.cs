@@ -54,6 +54,7 @@ namespace WebApplication2.Controllers
         {
             if (ModelState.IsValid)
             {
+                companyName.UpdateDate = DateTime.Now;
                 db.CompanyNames.Add(companyName);
                 db.SaveChanges();
                 return RedirectToAction("Index2");
@@ -90,6 +91,7 @@ namespace WebApplication2.Controllers
         {
             if (ModelState.IsValid)
             {
+                companyName.UpdateDate = DateTime.Now;
                 db.Entry(companyName).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index2");

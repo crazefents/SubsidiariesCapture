@@ -11,19 +11,18 @@ namespace WebApplication2.Models
 {
     using System;
     using System.Collections.Generic;
-
-   
+    using System.ComponentModel;
 
     public partial class Association
     {
-
+        //[DisplayName("foo bar")]
         public int AssocID { get; set; }
         public int CompanyID { get; set; }
         public int AssocType { get; set; }
         public double AssPercent { get; set; }
         public string DirectRel { get; set; }
-        public System.DateTime UpdateDate { get; set; }
-        public System.DateTime ChangeDate { get; set; }
+        public Nullable<System.DateTime> UpdateDate { get; set; }
+        public Nullable<System.DateTime> ChangeDate { get; set; }
         public int NoShares_YN { get; set; }
         public string AssocName { get; set; }
 
