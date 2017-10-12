@@ -11,7 +11,8 @@ namespace WebApplication2.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+
     public partial class CompanyName
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,6 +23,7 @@ namespace WebApplication2.Models
     
         public int CompanyID { get; set; }
         public string ExchangeCode { get; set; }
+        [DisplayName("Comapay Name")]
         public string CompanyName1 { get; set; }
         public string ShortCode { get; set; }
         public string CorpInfo { get; set; }
@@ -32,5 +34,7 @@ namespace WebApplication2.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Association> Associations { get; set; }
+        public virtual CompanyType CompanyType { get; set; }
+        public virtual Exchange Exchange { get; set; }
     }
 }

@@ -25,8 +25,7 @@ namespace WebApplication2.Controllers
         }
 
 
-        // GET: Associations
-  
+        // GET: Associations    //AssocType 3 =Associates
         public ActionResult Index(int? id)
         {
 
@@ -41,7 +40,7 @@ namespace WebApplication2.Controllers
         }
         
 
-        // GET: Associations
+        // GET: Associations     //AssocType 1 =Subsidiaries
         public ActionResult Index2(int? id)
         {
 
@@ -49,13 +48,13 @@ namespace WebApplication2.Controllers
             var associations = db.Associations.Where(x => x.CompanyID.Equals(companyId)).ToList();
 
 
-
+            
             associations = associations.Where(m => m.AssocType == 1).ToList();
 
             return View(associations.ToList());
         }
 
-        // GET: Associations
+        // GET: Associations    //AssocType 2 =Investments
         public ActionResult Index3(int? id)
         {
 
@@ -89,6 +88,8 @@ namespace WebApplication2.Controllers
         {
             ViewBag.AssocType = new SelectList(db.AssociationTypes, "AssocType", "Description");
              ViewBag.CompanyID = new SelectList(db.CompanyNames, "CompanyID", "CompanyName1");
+
+           
             return View();
         }
 
@@ -103,7 +104,8 @@ namespace WebApplication2.Controllers
             {
                 db.Associations.Add(association);
                 db.SaveChanges();
-                return RedirectToAction("ass");
+                 return RedirectToActionPermanent(Request.UrlReferrer.ToString());
+               
             }
 
             ViewBag.AssocType = new SelectList(db.AssociationTypes, "AssocType", "Description", association.AssocType);
@@ -113,7 +115,7 @@ namespace WebApplication2.Controllers
         }
 
         // GET: Associations/Edit/5
-        public ActionResult Edit(int? id, string EditMode)
+        public ActionResult Edit(int? id)
         {
             int companyId = id ?? 0;
 
@@ -129,9 +131,14 @@ namespace WebApplication2.Controllers
                 return HttpNotFound();
             }
 
+           
             
             ViewBag.AssocType = new SelectList(db.AssociationTypes, "AssocType", "Description", association.AssocType);
             ViewBag.CompanyID = new SelectList(db.CompanyNames, "CompanyID", "CompanyName1", association.CompanyID);
+            ViewBag.returnUrl = Request.UrlReferrer;//grab the previous url and adding it to model using viewbag
+
+           
+
             return View(association);
         }
 
@@ -140,7 +147,7 @@ namespace WebApplication2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "AssocID,AssocName,CompanyID,CompanyName1,AssocType,AssPercent,DirectRel,UpdateDate,DateTime.Now,ExchangeCode,NoShares_YN")] Association association)
+        public ActionResult Edit(string returnUrl, [Bind(Include = "AssocID,AssocName,CompanyID,CompanyName1,AssocType,AssPercent,DirectRel,UpdateDate,DateTime.Now,ExchangeCode,NoShares_YN")] Association association)
         {
             
             if (ModelState.IsValid)
@@ -148,13 +155,15 @@ namespace WebApplication2.Controllers
                 association.ChangeDate = DateTime.Now;
                 db.Entry(association).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("ass");
+                // return Redirect(Request.UrlReferrer.ToString());
+                return Redirect(returnUrl);
             }
             ViewBag.AssocType = new SelectList(db.AssociationTypes, "AssocType", "Description", association.AssocType);
             ViewBag.CompanyID = new SelectList(db.CompanyNames, "CompanyID", "CompanyName1", association.CompanyID);
             return View(association);
         }
 
+       
         // GET: Associations/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -163,6 +172,7 @@ namespace WebApplication2.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            ViewBag.returnUrl = Request.UrlReferrer;//grab the previous url and adding it to model using viewbag
             Association association = db.Associations.Find(id);
             if (association == null)
             {
@@ -174,14 +184,14 @@ namespace WebApplication2.Controllers
         // POST: Associations/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int? id)
+        public ActionResult DeleteConfirmed(int? id, string returnUrl)
         {
             int companyId = id ?? 0;
            // int AssocID = id ?? 0;
             Association association = db.Associations.Find(id);
             db.Associations.Remove(association);
             db.SaveChanges();
-            return RedirectToAction("ass");
+            return Redirect(returnUrl);
         }
 
         protected override void Dispose(bool disposing)

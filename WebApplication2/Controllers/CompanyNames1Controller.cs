@@ -15,7 +15,8 @@ namespace WebApplication2.Controllers
         private SubsidiariesEntities1 db = new SubsidiariesEntities1();
 
         // GET: CompanyNames1
-        public ActionResult Index(string CountryID,string ExchangeName,string BusinessSectorID,string CompanyName1, string fields,string CompanyTypeID, string ExchangeCode, string searchString, string Exchangeboth)
+
+        public ActionResult Index(string CountryID,string ExchangeName,string BusinessSectorID,string CompanyName1, string fields,string CompanyTypeID, string ExchangeCode, string searchString, string whatever)
         {
 
 
@@ -30,13 +31,19 @@ namespace WebApplication2.Controllers
             var allList = new object[] { "Company Names", "Country", "Business Sector" };
             ViewBag.fields = new SelectList(allList);
 
+           // var mes = new object[] { "No Data" };
+          //  ViewBag.check = new SelectList(mes);
+         
+            
+
 
             var companyNames = from m in db.CompanyNames
                                select m;
 
+           // var message = CompanyName1 + "No data";
 
-           
 
+            //TempData["Success"] = true;
             if (!String.IsNullOrEmpty(searchString))
             {    
 
@@ -57,6 +64,8 @@ namespace WebApplication2.Controllers
                     companyNames = companyNames.Where(s => s.BusinessSectorID.Contains(searchString));
 
                 }
+              
+
             }
 
          
@@ -72,10 +81,17 @@ namespace WebApplication2.Controllers
                 companyNames = companyNames.Where(x => x.CompanyTypeID.ToString() == CompanyTypeID);
             }
 
-            return View(companyNames);
+           
+
+                return View(companyNames);
+            
+           
+
+
+
         }
 
-       
+      
 
 
 
@@ -107,7 +123,6 @@ namespace WebApplication2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-       
         public ActionResult Create([Bind(Include = "CompanyID,ExchangeCode,CompanyName1,ShortCode,CorpInfo,CountryID,BusinessSectorID,CompanyTypeID,DateTime.Now")] CompanyName companyName)
         {
             if (ModelState.IsValid)

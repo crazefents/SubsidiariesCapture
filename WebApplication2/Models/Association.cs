@@ -19,24 +19,20 @@ namespace WebApplication2.Models
         public int AssocID { get; set; }
         public int CompanyID { get; set; }
         public int AssocType { get; set; }
+
+        [DisplayName("Percent")]
         public double AssPercent { get; set; }
+        [DisplayName("Direct/Indirect")]
         public string DirectRel { get; set; }
-        public Nullable<System.DateTime> UpdateDate { get; set; }
-        public Nullable<System.DateTime> ChangeDate { get; set; }
+        public string EditMode { get; set; }
+        [DisplayName("Previous Update")]
+        public System.DateTime UpdateDate { get; set; }
+        public System.DateTime ChangeDate { get; set; }
         public int NoShares_YN { get; set; }
+        [DisplayName("Name")]
         public string AssocName { get; set; }
-
-        public string EditMode { get; set; } 
-
-        
-       
-
-
+    
         public virtual AssociationType AssociationType { get; set; }
         public virtual CompanyName CompanyName { get; set; }
     }
-
-
-
-
 }

@@ -14,9 +14,18 @@ namespace WebApplication2.Models
     
     public partial class Exchange
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Exchange()
+        {
+            this.CompanyNames = new HashSet<CompanyName>();
+        }
+    
         public string ExchangeCode { get; set; }
         public string ExchangeName { get; set; }
         public string CountryID { get; set; }
         public System.DateTime UpdateDate { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CompanyName> CompanyNames { get; set; }
     }
 }

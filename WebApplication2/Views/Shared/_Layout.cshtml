@@ -15,12 +15,27 @@
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
 
+    <script src="https://lipis.github.io/bootstrap-sweetalert/lib/sweet-alert.js"></script>
+    <link href="~/Content/sweetalert/sweet-alert.css" rel="stylesheet" /> 
+  
+
     <style>
         body {
             background-image: url("paper.gif");
             background-color: #cccccc;
         }
     </style>
+
+
+
+    @*<script type="text/javascript">
+        if ('@TempData["Success"]' == true) {
+            alert("Form successfully submitted");
+            // handle refreshing the view, or redirect to another View (window.location.href = "")
+            @("window.location.href='" + Url.Action("Index2","CompanyNames" )+"'")"
+        }
+    </script>*@
+
 
     <style type="text/css">
         .table-hover tbody tr:hover td {
@@ -84,12 +99,18 @@
     <div class="container">
         
         @RenderBody()
-       
-        <p class="col-sm-1 col-sm-offset-11" >
-       
+        </div >
+       <div class="col-sm-1">
+           <input  type="submit" value="Back" onclick="location.href='@Url.Action("Index", "CompanyNames1")'" />
+       </div>
+        <div class="col-sm-offset-1 col-sm-offset-11">
+
             <input type="button" value="Print" onclick="window.print()">
-                
-        </p>
+     
+           
+        
+           
+    
 
     </div>
     <hr />

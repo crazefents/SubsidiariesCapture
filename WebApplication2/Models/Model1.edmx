@@ -76,6 +76,28 @@
           <Property Name="Password" Type="varchar" MaxLength="50" />
           <Property Name="MobileNo" Type="varchar" MaxLength="50" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'Subsidiaries .dbo.Sheet1$' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="Sheet1$">
+          <Property Name="exchangecode" Type="nvarchar" MaxLength="255" />
+          <Property Name="companyname" Type="nvarchar" MaxLength="255" />
+          <Property Name="shortcode" Type="nvarchar" MaxLength="255" />
+          <Property Name="corpinfo" Type="float" />
+          <Property Name="countryid" Type="float" />
+          <Property Name="businesssectorid" Type="float" />
+          <Property Name="companytypeid" Type="float" />
+          <Property Name="  exchangecode" Type="nvarchar" MaxLength="255" />
+          <Property Name="companyname1" Type="nvarchar" MaxLength="255" />
+          <Property Name="shortcode1" Type="nvarchar" MaxLength="255" />
+          <Property Name="corpinfo1" Type="float" />
+          <Property Name="countryid1" Type="float" />
+          <Property Name="businesssectorid1" Type="float" />
+          <Property Name="companytypeid1" Type="float" />
+          <Property Name="assoctype" Type="float" />
+          <Property Name="asspercent" Type="float" />
+          <Property Name="directrel" Type="nvarchar" MaxLength="255" />
+          <Property Name="noshares_yn" Type="float" />
+        </EntityType>-->
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -86,15 +108,27 @@
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
-        <Association Name="FK_Association_Association">
-          <End Role="AssociationType" Type="Self.AssociationType" Multiplicity="1" />
-          <End Role="Association" Type="Self.Association" Multiplicity="*" />
+        <Association Name="FK_CompanyName_CompanyType">
+          <End Role="CompanyType" Type="Self.CompanyType" Multiplicity="1" />
+          <End Role="CompanyName" Type="Self.CompanyName" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="AssociationType">
-              <PropertyRef Name="AssocType" />
+            <Principal Role="CompanyType">
+              <PropertyRef Name="CompanyTypeID" />
             </Principal>
-            <Dependent Role="Association">
-              <PropertyRef Name="AssocType" />
+            <Dependent Role="CompanyName">
+              <PropertyRef Name="CompanyTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyName_Exchange">
+          <End Role="Exchange" Type="Self.Exchange" Multiplicity="0..1" />
+          <End Role="CompanyName" Type="Self.CompanyName" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Exchange">
+              <PropertyRef Name="ExchangeCode" />
+            </Principal>
+            <Dependent Role="CompanyName">
+              <PropertyRef Name="ExchangeCode" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -119,9 +153,13 @@
           <EntitySet Name="Login" EntityType="Self.Login" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Registration_dbo" EntityType="Self.Registration_dbo" Schema="dbo" Table="Registration.dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_Association_Association" Association="Self.FK_Association_Association">
-            <End Role="AssociationType" EntitySet="AssociationType" />
-            <End Role="Association" EntitySet="Association" />
+          <AssociationSet Name="FK_CompanyName_CompanyType" Association="Self.FK_CompanyName_CompanyType">
+            <End Role="CompanyType" EntitySet="CompanyType" />
+            <End Role="CompanyName" EntitySet="CompanyName" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyName_Exchange" Association="Self.FK_CompanyName_Exchange">
+            <End Role="Exchange" EntitySet="Exchange" />
+            <End Role="CompanyName" EntitySet="CompanyName" />
           </AssociationSet>
           <AssociationSet Name="FK_Login_Registration_dbo" Association="Self.FK_Login_Registration_dbo">
             <End Role="Registration_dbo" EntitySet="Registration_dbo" />
@@ -171,6 +209,8 @@
           <Property Name="CompanyTypeID" Type="Int32" Nullable="false" />
           <Property Name="UpdateDate" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Associations" Relationship="Self.FK_Association_CompanyName" FromRole="CompanyName" ToRole="Association" />
+          <NavigationProperty Name="CompanyType" Relationship="SubsidiariesModel.FK_CompanyName_CompanyType" FromRole="CompanyName" ToRole="CompanyType" />
+          <NavigationProperty Name="Exchange" Relationship="SubsidiariesModel.FK_CompanyName_Exchange" FromRole="CompanyName" ToRole="Exchange" />
         </EntityType>
         <EntityType Name="CompanyType">
           <Key>
@@ -179,6 +219,7 @@
           <Property Name="CompanyTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CompanyTypeDesc" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="UpdateDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="CompanyNames" Relationship="SubsidiariesModel.FK_CompanyName_CompanyType" FromRole="CompanyType" ToRole="CompanyName" />
         </EntityType>
         <EntityType Name="Exchange">
           <Key>
@@ -188,6 +229,7 @@
           <Property Name="ExchangeName" Type="String" MaxLength="100" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="CountryID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="UpdateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="CompanyNames" Relationship="SubsidiariesModel.FK_CompanyName_Exchange" FromRole="Exchange" ToRole="CompanyName" />
         </EntityType>
         <EntityType Name="Login">
           <Key>
@@ -276,7 +318,39 @@
             <End Role="Registration_dbo" EntitySet="Registration_dbo" />
             <End Role="Login" EntitySet="Logins" />
           </AssociationSet>
+          <AssociationSet Name="FK_CompanyName_CompanyType" Association="SubsidiariesModel.FK_CompanyName_CompanyType">
+            <End Role="CompanyType" EntitySet="CompanyTypes" />
+            <End Role="CompanyName" EntitySet="CompanyNames" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyName_Exchange" Association="SubsidiariesModel.FK_CompanyName_Exchange">
+            <End Role="Exchange" EntitySet="Exchanges" />
+            <End Role="CompanyName" EntitySet="CompanyNames" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="FK_CompanyName_CompanyType">
+          <End Type="SubsidiariesModel.CompanyType" Role="CompanyType" Multiplicity="1" />
+          <End Type="SubsidiariesModel.CompanyName" Role="CompanyName" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompanyType">
+              <PropertyRef Name="CompanyTypeID" />
+            </Principal>
+            <Dependent Role="CompanyName">
+              <PropertyRef Name="CompanyTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyName_Exchange">
+          <End Type="SubsidiariesModel.Exchange" Role="Exchange" Multiplicity="0..1" />
+          <End Type="SubsidiariesModel.CompanyName" Role="CompanyName" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Exchange">
+              <PropertyRef Name="ExchangeCode" />
+            </Principal>
+            <Dependent Role="CompanyName">
+              <PropertyRef Name="ExchangeCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->

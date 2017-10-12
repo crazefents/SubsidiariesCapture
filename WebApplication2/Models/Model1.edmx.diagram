@@ -7,15 +7,17 @@
       <Diagram DiagramId="65deff63f7f94a358306e7c81b022a67" Name="Diagram1">
         <EntityTypeShape EntityType="SubsidiariesModel.Association" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="SubsidiariesModel.AssociationType" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="SubsidiariesModel.CompanyName" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SubsidiariesModel.CompanyName" Width="1.5" PointX="6" PointY="3.125" IsExpanded="true" />
         <EntityTypeShape EntityType="SubsidiariesModel.CompanyType" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SubsidiariesModel.Exchange" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SubsidiariesModel.Login" Width="1.5" PointX="5" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SubsidiariesModel.Login" Width="1.5" PointX="0.5" PointY="5.375" IsExpanded="true" />
         <EntityTypeShape EntityType="SubsidiariesModel.Registration_dbo" Width="1.5" PointX="2.75" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="SubsidiariesModel.sysdiagram" Width="1.5" PointX="7.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SubsidiariesModel.sysdiagram" Width="1.5" PointX="9.375" PointY="3.875" IsExpanded="true" />
         <AssociationConnector Association="SubsidiariesModel.FK_Association_Association" ManuallyRouted="false" />
         <AssociationConnector Association="SubsidiariesModel.FK_Association_CompanyName" ManuallyRouted="false" />
         <AssociationConnector Association="SubsidiariesModel.FK_Login_Registration_dbo" ManuallyRouted="false" />
+        <AssociationConnector Association="SubsidiariesModel.FK_CompanyName_CompanyType" />
+        <AssociationConnector Association="SubsidiariesModel.FK_CompanyName_Exchange" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
