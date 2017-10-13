@@ -2,12 +2,15 @@
 
 @{
     ViewBag.Title = "Index";
+   
 }
 
 <h2>Subsidiaries</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create22")
+  
+  
+    @*@Html.ActionLink("Create New", "Create22?id=@item.AssocID")*@
 </p>
 <table class="table">
     <tr>
@@ -38,7 +41,7 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+@foreach ( var item in Model) {
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.AssocName)
@@ -67,7 +70,9 @@
         <td>
             @Html.ActionLink("Edit", "Edit", new { id = item.AssocID }) |
             @Html.ActionLink("Details", "Details", new { id = item.AssocID }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.AssocID })
+            @Html.ActionLink("Delete", "Delete", new { id = item.AssocID }) |
+
+            @Html.ActionLink("Create New", "Create22", new { id = item.CompanyID })
         </td>
     </tr>
 }

@@ -7,7 +7,7 @@
 <h2>Investments</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create22")
+    @*@Html.ActionLink("Create New", "Create22?id=@item.CompanyID")*@
 </p>
 <table class="table">
     <tr>
@@ -67,7 +67,8 @@
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.AssocID }) |
             @Html.ActionLink("Details", "Details", new { id=item.AssocID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.AssocID })
+            @Html.ActionLink("Delete", "Delete", new { id=item.AssocID }) |
+            @Html.ActionLink("Create New", "/Associations/Create22?id=@item.CompanyID")
         </td>
     </tr>
 }

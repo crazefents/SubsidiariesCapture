@@ -84,12 +84,17 @@ namespace WebApplication2.Controllers
         }
 
         // GET: Associations/Create
-        public ActionResult Create22()
+        public ActionResult Create22(int? id)
         {
+            int companyId = id ?? 0;
+
+            Association association = db.Associations.Find(id);
             ViewBag.AssocType = new SelectList(db.AssociationTypes, "AssocType", "Description");
              ViewBag.CompanyID = new SelectList(db.CompanyNames, "CompanyID", "CompanyName1");
+            ViewBag.returnUrl = Request.UrlReferrer;//grab the previous url and adding it to model using viewbag
 
            
+
             return View();
         }
 
@@ -98,14 +103,14 @@ namespace WebApplication2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create22([Bind(Include = "AssocID,AssocName,CompanyID,CompanyName1,AssocType,AssPercent,DirectRel,UpdateDate,ChangeDate,ExchangeCode,NoShares_YN")] Association association)
+        public ActionResult Create22(string returnUrl,[Bind(Include = "AssocID,AssocName,CompanyID,CompanyName1,AssocType,AssPercent,DirectRel,UpdateDate,ChangeDate,ExchangeCode,NoShares_YN")] Association association)
         {
             if (ModelState.IsValid)
             {
                 db.Associations.Add(association);
                 db.SaveChanges();
-                 return RedirectToActionPermanent(Request.UrlReferrer.ToString());
-               
+                return Redirect(returnUrl);
+
             }
 
             ViewBag.AssocType = new SelectList(db.AssociationTypes, "AssocType", "Description", association.AssocType);
